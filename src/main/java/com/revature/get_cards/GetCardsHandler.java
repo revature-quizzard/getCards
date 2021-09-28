@@ -14,7 +14,7 @@ import java.util.List;
 public class GetCardsHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     private static final Gson mapper = new GsonBuilder().setPrettyPrinting().create();
-    private final CardRepo cardRepo = new CardRepo();
+    private final SetRepo setRepo = new SetRepo();
 
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent requestEvent, Context context){
@@ -23,9 +23,11 @@ public class GetCardsHandler implements RequestHandler<APIGatewayProxyRequestEve
 
         logger.log("Received event: " + requestEvent);
 
-        List<Card> cards = cardRepo.getAllCards();
+        String id = requestEvent.getQueryStringParameters().get("id");
+
+        Set sets = setRepo.getSetId(id);
         APIGatewayProxyResponseEvent responseEvent = new APIGatewayProxyResponseEvent();
-        responseEvent.setBody(mapper.toJson(cards));
+        responseEvent.setBody(mapper.toJson(sets));
 
         return responseEvent;
 
