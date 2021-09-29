@@ -27,8 +27,9 @@ public class GetCardsHandler implements RequestHandler<APIGatewayProxyRequestEve
 
         Set sets = setRepo.getSetId(id);
         APIGatewayProxyResponseEvent responseEvent = new APIGatewayProxyResponseEvent();
-        responseEvent.setBody(mapper.toJson(sets));
+        responseEvent.setBody(mapper.toJson(sets.getCards()));
 
+        System.out.println(responseEvent);
         return responseEvent;
 
     }
