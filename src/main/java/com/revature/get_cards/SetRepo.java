@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.revature.exception.ResourceNotFoundException;
 
 
 import java.util.HashMap;
@@ -26,6 +27,10 @@ public class SetRepo {
                 .withExpressionAttributeValues(input);
 
         List<Set> result = dbReader.scan(Set.class, query);
+
+        if(result.size() == 0) {
+            throw new ResourceNotFoundException();
+        }
 
         return result.get(0);
     }

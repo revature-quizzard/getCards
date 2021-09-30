@@ -18,8 +18,7 @@ public class Set {
     private String id;
 
     @DynamoDBAttribute
-    private String name;
-
+    private String setName;
 
     @DynamoDBAttribute
     private List<Card> cards;
@@ -28,7 +27,7 @@ public class Set {
     private String author;
 
     @DynamoDBAttribute
-    private boolean is_public;
+    private boolean isPublic;
 
     @DynamoDBAttribute
     private int views;
