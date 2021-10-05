@@ -11,6 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * The SetRepo class is a database repository which provides CRUD operations on the Sets table.
+ */
+
 public class SetRepo {
 
     private final DynamoDBMapper dbReader;

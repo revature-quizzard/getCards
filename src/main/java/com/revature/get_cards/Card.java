@@ -6,6 +6,10 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import lombok.Data;
 
+/**
+ * The Card class is a POJO representing the Card model.
+ */
+
 @Data
 @DynamoDBDocument
 public class Card {

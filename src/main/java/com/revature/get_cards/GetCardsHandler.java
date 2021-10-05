@@ -11,6 +11,14 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+
+
+/**
+ * The GetCardsHandler class is an AWS Lambda function to handle get operations on Card objects.
+ * This function occupies the GET Request Method on the Card endpoint.
+ */
+
+
 public class GetCardsHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     private static final Gson mapper = new GsonBuilder().setPrettyPrinting().create();
