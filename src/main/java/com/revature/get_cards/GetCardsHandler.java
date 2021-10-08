@@ -11,10 +11,18 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+
+
+/**
+ * The GetCardsHandler class is an AWS Lambda function to handle get operations on Card objects.
+ * This function occupies the GET Request Method on the Card endpoint.
+ */
+
+
 public class GetCardsHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     private static final Gson mapper = new GsonBuilder().setPrettyPrinting().create();
-    private final CardRepo cardRepo = new CardRepo();
+    private final SetRepo setRepo = new SetRepo();
 
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent requestEvent, Context context){
@@ -23,10 +31,13 @@ public class GetCardsHandler implements RequestHandler<APIGatewayProxyRequestEve
 
         logger.log("Received event: " + requestEvent);
 
-        List<Card> cards = cardRepo.getAllCards();
-        APIGatewayProxyResponseEvent responseEvent = new APIGatewayProxyResponseEvent();
-        responseEvent.setBody(mapper.toJson(cards));
+        String id = requestEvent.getQueryStringParameters().get("id");
 
+        Set sets = setRepo.getSetId(id);
+        APIGatewayProxyResponseEvent responseEvent = new APIGatewayProxyResponseEvent();
+        responseEvent.setBody(mapper.toJson(sets.getCards()));
+
+        System.out.println(responseEvent);
         return responseEvent;
 
     }
